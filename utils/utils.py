@@ -46,13 +46,13 @@ def verify_ward(ward_name, floor_number):
 
 #Calculate Severity Levels
 def calculate_severity(result_value):
-    if result_value <= 20:
+    if result_value and result_value <= 20:
         return SeverityEnum.normal
-    elif result_value <= 40:
+    elif result_value and result_value <= 40:
         return SeverityEnum.mild
-    elif result_value <= 60:
+    elif result_value and result_value <= 60:
         return SeverityEnum.moderate
-    elif result_value <= 80:
+    elif result_value and result_value <= 80:
         return SeverityEnum.severe
     else:
         return SeverityEnum.critical

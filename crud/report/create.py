@@ -2,7 +2,6 @@ from flask import current_app
 from database import db
 from models.models import Report
 from sqlalchemy.exc import IntegrityError
-from utils.utils import check_enum_format
 
 #Create Report
 def create_report_crud(patient_id, employee_id, test_name, result_value, severity, report_date):
@@ -13,7 +12,7 @@ def create_report_crud(patient_id, employee_id, test_name, result_value, severit
             employee_id = employee_id,
             test_name = test_name,
             result_value = result_value,
-            severity = check_enum_format(severity),
+            severity = severity,
             report_date = report_date
         )
 

@@ -7,6 +7,7 @@ from auth import require_auth
 
 ward_delete_bp = Blueprint("ward_delete_bp", __name__ , url_prefix=("/ward"))
 
+#Delete Ward
 @ward_delete_bp.route("/delete", methods=["DELETE"])
 @require_auth
 def delete_ward():

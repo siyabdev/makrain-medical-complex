@@ -10,8 +10,12 @@ class CreateReportRequest:
     def is_valid(self):
 
         #Fields required
-        if not all([self.patient_id, self.employee_id, self.test_name, self.result_value, self.severity, self.report_date]):
+        if not all([self.patient_id, self.employee_id, self.test_name, self.result_value, self.report_date]):
             return False, "Missing required fields."
+        
+        #Validate result value
+        if self.result_value and self.result_value > 100:
+            return False, "Result value should be less than or equal to 100."
         
         return True, None
 
@@ -28,10 +32,14 @@ class UpdateReportRequest:
         if not self.id:
             return False, "Report ID missing. Please provide report ID."
             
+        #Validate result value
+        if self.result_value and self.result_value > 100:
+            return False, "Result value should be less than or equal to 100."
+            
         return True, None
     
     def has_any_updates(self):
-        return any([self.test_name, self.result_value, self.severity, self.report_date])
+        return any([self.test_name, self.result_value, self.report_date])
     
 #Delete Report Request
 class DeleteReportRequest:
@@ -86,15 +94,15 @@ class ReportResponse:
             "id": self.id,
             "patient_id": self.patient_id,
             "patient_name": self.patient_name,
-            "patient_gender": self.patient_gender.value,
+            "patient_gender": self.patient_gender.value if self.patient_gender else None,
             "patient_age": self.patient_age, 
             "employee_id": self.employee_id,
             "employee_name": self.employee_name,
-            "employee_role": self.employee_role.value,
-            "employee_gender": self.employee_gender.value,
+            "employee_role": self.employee_role.value if self.employee_role else None,
+            "employee_gender": self.employee_gender.value if self.employee_gender else None,
             "test_name": self.test_name,
             "result_value": self.result_value,
-            "severity": self.severity.value,
+            "severity": self.severity.value if self.severity else None,
             "report_date": self.report_date.isoformat()
         }
 
@@ -110,7 +118,7 @@ class ReportShortResponse:
         return{
             "id": self.id,
             "test_name": self.test_name,
-            "severity": self.severity.value,
+            "severity": self.severity.value if self.severity else None,
             "report_date": self.report_date.isoformat()
         }
     

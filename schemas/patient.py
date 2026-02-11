@@ -16,7 +16,7 @@ class CreatePatientRequest:
             return False, "Missing required fields."
         
         #Validate patient age value
-        if self.patient_age < 0:
+        if self.patient_age and self.patient_age < 0:
             return False, "Patient age should be greater than or equal to 0."
         
         #Validate patient gender against enum
@@ -39,7 +39,7 @@ class UpdatePatientRequest:
             return False, "Patient ID missing. Please provide patient ID."
         
         #Validate patient age value
-        if self.patient_age < 0:
+        if self.patient_age and self.patient_age < 0:
             return False, "Patient age should be greater than or equal to 0."
         
         #Validate patient gender against enum
@@ -84,7 +84,7 @@ class PatientResponse:
             "ward_id": self.ward_id,
             "patient_code": self.patient_code,
             "patient_name": self.patient_name,
-            "patient_gender": self.patient_gender.value,
+            "patient_gender": self.patient_gender.value if self.patient_gender else None,
             "patient_age":self.patient_age
         }
 
@@ -100,7 +100,7 @@ class PatientShortResponse:
         return{
             "id": self.id,
             "patient_name": self.patient_name,
-            "patient_gender": self.patient_gender.value,
+            "patient_gender": self.patient_gender.value if self.patient_gender else None,
             "patient_age":self.patient_age
         }
     

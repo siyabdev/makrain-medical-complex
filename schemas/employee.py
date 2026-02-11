@@ -84,8 +84,8 @@ class EmployeeResponse:
             "ward_id": self.ward_id,
             "employee_code": self.employee_code,
             "employee_name": self.employee_name,
-            "employee_role": self.employee_role.value,
-            "employee_gender": self.employee_gender.value
+            "employee_role": self.employee_role.value if self.employee_role else None,
+            "employee_gender": self.employee_gender.value if self.employee_gender else None
         }
 
 #Employee Short Response
@@ -100,8 +100,8 @@ class EmployeeShortResponse:
         return{
             "id": self.id,
             "employee_name": self.employee_name,
-            "employee_role": self.employee_role.value,
-            "employee_gender": self.employee_gender.value
+            "employee_role": self.employee_role.value if self.employee_role else None,
+            "employee_gender": self.employee_gender.value if self.employee_gender else None
         }
     
     @staticmethod
@@ -111,4 +111,4 @@ class EmployeeShortResponse:
 #Employee List Response
 class EmployeeListResponse:
     def from_list(employees):
-        return [EmployeeResponse(emp).to_dict for emp in employees]
+        return [EmployeeResponse(emp).to_dict() for emp in employees]

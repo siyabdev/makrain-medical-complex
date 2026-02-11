@@ -31,7 +31,7 @@ def login():
     try:
         token = generate_token(login.employee_id, login.username)
         
-        response = LoginResponse(token, login.employee_id, login.username)
+        response = LoginResponse(token, login.employee_id, login.username, login.is_active)
 
         current_app.logger.info(f"Login successful for username '{data.username}'.")
         return jsonify({

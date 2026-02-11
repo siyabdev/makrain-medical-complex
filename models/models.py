@@ -133,9 +133,13 @@ class Report(BaseModel):
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.id', ondelete='CASCADE'), nullable=False)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id', ondelete='CASCADE'), nullable=False)
     test_name = db.Column(db.String(120), nullable=False)
-    result_value = db.Column(db.String(120), nullable=False)
-    severity = db.Column(db.Enum(SeverityEnum, name="severity_enum"), nullable=False)
+    result_value = db.Column(db.Float, nullable=False)
+    severity = db.Column(db.Enum(SeverityEnum, name="severity_enum"))
     report_date = db.Column(db.Date, nullable=False)
+
+    __table_args__ = (
+    CheckConstraint("result_value <= 100", name="min_patient_age_check"),
+    )
 
     #Relationships
     employee = relationship("Employee", foreign_keys=[employee_id])
@@ -147,7 +151,7 @@ class Report(BaseModel):
             "patient_id": self.patient_id,
             "employee_id": self.employee_id,
             "test_name": self.test_name,
-            "result_value": self.result_value,
+            "result_value": float(self.result_value),
             "severity": self.severity.value,
             "report_date": self.report_date.isoformat()
     }
