@@ -1,4 +1,7 @@
-from models.models import Employee, Patient, Report, Ward, SeverityEnum
+from models.employee import Employee
+from models.patient import Patient
+from models.report import Report, SeverityEnum
+from models.ward import Ward
 
 #Checking Enum Format 
 def check_enum_format(value):

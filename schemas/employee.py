@@ -1,4 +1,4 @@
-from models.models import GenderEnum, EmployeeRoleEnum
+from models.employee import GenderEnum, EmployeeRoleEnum
 
 #Create Employee Request
 class CreateEmployeeRequest:

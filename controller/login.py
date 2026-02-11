@@ -1,14 +1,15 @@
 from flask import Blueprint, request, jsonify, current_app
-from crud.login.login import validate_login_crud
+from crud.login import validate_login_crud
 from schemas.login import LoginRequest, LoginResponse
 from auth import generate_token
 from sqlalchemy.exc import IntegrityError
 
+#Blueprint
 login_bp = Blueprint("login_bp", __name__ , url_prefix="/employee")
 
 #Login
 @login_bp.route("/login", methods=["POST"])
-def login():
+def login_controller():
     data = LoginRequest(request.json)
     valid, message = data.is_valid()
 

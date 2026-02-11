@@ -1,5 +1,5 @@
 from flask import current_app
-from models.models import Login
+from models.login import Login
 from sqlalchemy.exc import IntegrityError
 
 #Validate Login

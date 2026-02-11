@@ -1,4 +1,4 @@
-from models.models import GenderEnum
+from models.patient import GenderEnum
 
 #Create Patient Request
 class CreatePatientRequest:
