@@ -12,9 +12,21 @@ class CreatePatientRequest:
     def is_valid(self):
 
         #Fields required
-        if not all([self.ward_id, self.patient_code, self.patient_name, self.patient_gender, self.patient_age]):
-            return False, "Missing required fields."
-        
+        if not self.ward_id:
+            return False, "Missing ward ID. Please provide ward ID."
+
+        if not self.patient_code:
+            return False, "Missing patient code. Please provide patient code."
+
+        if not self.patient_name:
+            return False, "Missing patient name. Please provide patient name."
+
+        if not self.patient_gender:
+            return False, "Missing patient gender. Please provide patient gender."
+
+        if not self.patient_age:
+            return False, "Missing patient age. Please provide patient age."
+
         #Validate patient age value
         if self.patient_age and self.patient_age < 0:
             return False, "Patient age should be greater than or equal to 0."

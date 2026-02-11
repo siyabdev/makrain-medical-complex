@@ -12,9 +12,21 @@ class CreateEmployeeRequest:
     def is_valid(self):
 
         #Fields required
-        if not all([self.ward_id, self.employee_code, self.employee_name, self.employee_role, self.employee_gender]):
-            return False, "Missing required fields."
-        
+        if not self.ward_id:
+            return False, "Missing ward ID. Please provide ward ID."
+
+        if not self.employee_code:
+            return False, "Missing employee code. Please provide employee code."
+
+        if not self.employee_name:
+            return False, "Missing employee name. Please provide employee name."
+
+        if not self.employee_role:
+            return False, "Missing employee role. Please provide employee role."
+
+        if not self.employee_gender:
+            return False, "Missing employee gender. Please provide employee gender."
+
         #Validate employee gender against enum
         if self.employee_gender and self.employee_gender not in [employee_gender.value for employee_gender in GenderEnum]:
             return False, "Invalid employee gender provided."

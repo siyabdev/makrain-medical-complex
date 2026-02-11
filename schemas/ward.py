@@ -7,9 +7,12 @@ class CreateWardRequest:
     def is_valid(self):
 
         #Fields required
-        if not all([self.ward_name, self.floor_number]):
-            return False, "Missing required fields."
-        
+        if not self.ward_name:
+            return False, "Missing ward name. Please provide ward name."
+
+        if not self.floor_number:
+            return False, "Missing floor number. Please provide floor number."
+
         return True, None
 
 #Update Ward Request

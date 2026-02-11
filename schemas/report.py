@@ -10,8 +10,20 @@ class CreateReportRequest:
     def is_valid(self):
 
         #Fields required
-        if not all([self.patient_id, self.employee_id, self.test_name, self.result_value, self.report_date]):
-            return False, "Missing required fields."
+        if not self.patient_id:
+            return False, "Missing patient ID. Please provide patient ID."
+
+        if not self.employee_id:
+            return False, "Missing employee ID. Please provide employee ID."
+
+        if not self.test_name:
+            return False, "Missing test name. Please provide test name."
+
+        if not self.result_value:
+            return False, "Missing result value. Please provide result value."
+
+        if not self.report_date:
+            return False, "Missing report date. Please provide report date."
         
         #Validate result value
         if self.result_value and self.result_value > 100:
